@@ -10,7 +10,7 @@ class Menu(models.Model):
     fat = models.FloatField()
     carbohydrate = models.FloatField()
     cal = models.FloatField()
-    img = models.ImageField()
+    img = models.ImageField(upload_to='images')
     
     def __str__(self):
         return self.name
