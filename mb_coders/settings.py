@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ide-d3951ba539d04a7ba562895b6c8a9d23-8080.cs50.ws']
+ALLOWED_HOSTS = ['ide-329bfe807c854728898787cf223fe389-8080.cs50.ws']
 
 
 # Application definition
