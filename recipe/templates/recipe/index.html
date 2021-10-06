@@ -1,1 +1,21 @@
 <p>hello</p>
+
+<form action="{% url 'recipe:index' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <p>テスト</p>
+        <label>
+            <input type="checkbox" name="genres" value="vegetable" checked>
+            野菜
+        </label>
+        <label>
+            <input type="checkbox" name="genres" value="meat" value="yes">
+            肉
+        </label>
+        <label>
+            <input type="checkbox" name="genres" value="others" value="yes">
+            そのほか
+        </label>
+        <button id="submit" type="submit">確かめる</button>
+    </div>
+</form>
