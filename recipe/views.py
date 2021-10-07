@@ -3,26 +3,34 @@ from django.views.generic import TemplateView
 from django.db.models import Q
 from .models import Menu, Genre, Small_Genre, Material, Menu_Material
 
-# Create your views here.
 def index(request):
-    # 仕様変更をしたい
-    # 大ジャンルで選ぶと大ジャンルしか選択できない
-    # 小ジャンルを選ぶと小ジャンルのみ
-    # マテリアルを選ぶとマテリアルだけっていう風にしたい
     if request.method == "POST":    # 検索が押された場合
-        # # 選択されたマテリアルでQオブジェクトを作る
-        # materials = request.POST.getlist('materials')
-        # materials_query = Q()
-        # for material in materials:
-        #     materials_query &= Q(material)
-        # # マテリアル→レシピにAND検索する
-        # recipe_query_set = Menu.object.filter(materials_query)
+        # ユーザーが選択したmaterialのidを受け取る
+        materials = request.POST.getlist('materials')
 
-        # 検索を元にレシピを抽出(test)
-        recipes_query_set = Menu.objects.all()
-        # レシピをjson型にして返す
-        recipes = {'recipes':list(recipes_query_set.values())}
-        return render(request, 'recipe/result.html', recipes)
+        # 検索食材1つずつに該当するレシピをすべて取得
+        dup_recipes_list = []
+        for material in materials:
+            material = int(material)
+            # マテリアル→レシピの検索(材料1つずつ)
+            material_relate_recipe = Material.objects.get(pk=material)
+            recipe_query = material_relate_recipe.menu.all()
+            # 検索結果をlist型に変換
+            recipe_list = list(recipe_query.values())
+            # 取得したリストを全て重複ありのレシピリストに入れる
+            dup_recipes_list.extend(recipe_list)
+
+        # 疑似AND検索
+        recipes_list = []
+        # リスト内の重複をチェック
+        for recipe in dup_recipes_list:
+            # 選択されたmaterialの数と重複数が同じだった場合(AND検索の代用)
+            if dup_recipes_list.count(recipe) == len(materials):
+                # result画面に返すレシピに加える
+                recipes_list.append(recipe)
+
+        # レシピを辞書型にして返す
+        return render(request, 'recipe/result.html', {'recipes':recipes_list})
 
     else:   # GET方式でアクセスされた場合
         # 検索用データを抽出して辞書型のリストに変換
