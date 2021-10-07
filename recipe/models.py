@@ -31,10 +31,6 @@ class Small_Genre(models.Model):
 class Material(models.Model):
     small_genre = models.ForeignKey(Small_Genre, on_delete=models.CASCADE)
     name = models.CharField(max_length = 100, unique=True)
-    menu = models.ManyToManyField(
-        Menu,
-        through='Menu_Material',
-    )
 
     def __str__(self):
         return self.name
