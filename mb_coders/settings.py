@@ -37,9 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'recipe',
-    'api.apps.ApiConfig',
-    'rest_framework',
+    'recipe'
 ]
 
 MIDDLEWARE = [
@@ -79,7 +77,7 @@ WSGI_APPLICATION = 'mb_coders.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'), # makemigrationでのエラー解消のためstr()に修正
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
