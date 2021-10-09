@@ -8,7 +8,6 @@ def index(request):
         # ユーザーが選択したmaterialのidを受け取る
         materials = request.POST.getlist('materials')
 
-        # 検索食材1つずつに該当するレシピをすべて取得
         dup_recipes_list = []
         for material in materials:
             material = int(material)
@@ -17,19 +16,21 @@ def index(request):
             recipe_query = material_relate_recipe.menu.all()
             # 検索結果をlist型に変換
             recipe_list = list(recipe_query.values())
-            # 取得したリストを全て重複ありのレシピリストに入れる
+            # 取得したリストを結合する
             dup_recipes_list.extend(recipe_list)
 
-        # 疑似AND検索
         recipes_list = []
         # リスト内の重複をチェック
         for recipe in dup_recipes_list:
             # 選択されたmaterialの数と重複数が同じだった場合(AND検索の代用)
             if dup_recipes_list.count(recipe) == len(materials):
+                # 既にrecipes_listに含まれていればスルー
+                if recipe in recipes_list:
+                    continue
                 # result画面に返すレシピに加える
                 recipes_list.append(recipe)
 
-        # レシピを辞書型にして返す
+        # レシピをjson型にして返す
         return render(request, 'recipe/result.html', {'recipes':recipes_list})
 
     else:   # GET方式でアクセスされた場合
