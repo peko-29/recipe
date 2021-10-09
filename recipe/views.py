@@ -45,3 +45,8 @@ def index(request):
         # 抽出した辞書型のリストをモデルkeyの辞書型に格納
         materials_to_search = {'genres_list':genres_list, 'small_genres_list':small_genres_list, 'materials_list':materials_list}
         return render(request, 'recipe/index.html', materials_to_search)
+
+def detail(request, menu_id):
+    menus = Menu.objects.get(id = menu_id)
+    materials = menus.material_set.all()
+    return render(request, 'recipe/detail.html',{'menus':menus, 'materials': materials})
