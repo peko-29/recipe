@@ -1,109 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    table{
-        border-collapse: collapse;
-        width:100%
-    }
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-    th {
-        color:white;
-        background-color: #1E90FF;
-    }
-    .asc::after {
-		  content: "↓";
-		}
-		.desc::after {
-		  content: "↑";
-		}
-		.b-solid {
-			border-style: solid;
-		}
-</style>
-<body>
-    <div id="app">
-        <h1>[[ message ]]</h1>
-    	<table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>レシピ名</th>
-                    <th @click="sortBy('cal')" :class="addClass('cal')">カロリー(kcal)</th>
-                    <th @click="sortBy('cost')" :class="addClass('cost')">価格(円)</th>
-                    <th @click="sortBy('time')" :class="addClass('time')">時間(分)</th>
-                    <th @click="sortBy('protein')" :class="addClass('protein')">タンパク量(g)</th>
-            	</tr>
-            </thead>
-            <tbody>
-                <tr v-for="recipe in sort_recipes" :key="recipe.id">
-                	<td>画像予定</td>
-                    <td><a href="{% url 'recipe:detail' 1 %}">[[ recipe.name ]]</a></td>
-                    <td>[[ recipe.cal ]]</td>
-                    <td>[[ recipe.cost ]]</td>
-                    <td>[[ recipe.time ]]</td>
-                    <td>[[ recipe.protein ]]</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        new Vue({
-            el: '#app',
-            delimiters: ['[[', ']]'],
-            data: {
-                message: "検索結果",
-                recipes: [],
-                sort_key: "",
-                sort_asc: true,
-            },
-            methods: {
-                sortBy(key) {
-                    this.sort_key === key
-                        ? (this.sort_asc = !this.sort_asc)
-                        : (this.sort_asc = true);
-                    this.sort_key = key;
-                },
-        	    addClass(key) {
-                    return {
-                        asc: this.sort_key === key && this.sort_asc,
-                        desc: this.sort_key === key && !this.sort_asc,
-                    };
-                },
-        	},
-        	computed: {
-                sort_recipes() {
-                    if (this.sort_key != "") {
-                        let set = 1;
-                        this.sort_asc ? (set = 1) : (set = -1);
-                        this.recipes.sort((a, b) => {
-                            if (a[this.sort_key] < b[this.sort_key]) return -1 * set;
-                            if (a[this.sort_key] > b[this.sort_key]) return 1 * set;
-                            return 0;
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>検索結果</title>
+    </head>
 
-                        });
-                        return this.recipes;
-                    } else {
-                        return this.recipes;
-                    }
-                },
-        	},
-        	mounted(){
-                axios.get('api/data-list')
-                .then(response => this.recipes = response.data);
-        	}
-        });
-    </script>
-</body>
+    <body>
+        <!--ソートボタン-->
+        <div>
+            <button type="submit">カロリー</button>
+            <button type="submit">価格</button>
+            <button type="submit">時間</button>
+            <button type="submit">タンパク量</button>
+        </div>
+
+        <!--検索に一致したレシピを表示-->
+        <div>
+            {% for recipe in recipes %}
+                <img src="/{{ recipe.img }}" style="width: 200px; height: auto;"> <br>
+                {{ recipe.name}} <br>
+                {{ recipe.cal }}カロリー <br>
+                {{ recipe.cost }}円 <br>
+                {{ recipe.time }}分 <br>
+                {{ recipe.protein }}g <br>
+            {% endfor %}
+        </div>
+    </body>
 </html>
