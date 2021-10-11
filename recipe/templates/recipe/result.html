@@ -19,12 +19,15 @@
         <!--検索に一致したレシピを表示-->
         <div>
             {% for recipe in recipes %}
-                <img src="/{{ recipe.img }}" style="width: 200px; height: auto;"> <br>
-                {{ recipe.name}} <br>
-                {{ recipe.cal }}カロリー <br>
-                {{ recipe.cost }}円 <br>
-                {{ recipe.time }}分 <br>
-                {{ recipe.protein }}g <br>
+                <a href="{% url 'recipe:detail' recipe.id %}">
+                    <img src="/{{ recipe.img }}" style="width: 200px; height: auto;"> <br>
+                    {{ recipe.name}} <br>
+                    {{ recipe.cal }}カロリー <br>
+                    {{ recipe.cost }}円 <br>
+                    {{ recipe.time }}分 <br>
+                    {{ recipe.protein }}g <br>
+                </a>
+
             {% endfor %}
         </div>
     </body>

@@ -1,2 +1,55 @@
-{{menus}}
-{{materials}}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ menus.name }}</title>
+    </head>
+
+    <body>
+        <div>
+            <img src="/{{ menus.img }}" style="width: 200px; height: auto;">
+        </div>
+
+        <div>
+            {{menus.name }}
+        </div>
+
+        <div>
+            コスト{{menus.cost}}円
+        </div>
+
+        <div>
+            時間{{menus.time }}分
+        </div>
+
+        <div>
+            タンパク質{{menus.protein }}g
+        </div>
+
+        <div>
+            脂質{{menus.fat }}g
+        </div>
+
+        <div>
+            炭水化物{{menus.carbohydrate}}g
+        </div>
+
+        <br>
+
+        <div>
+            材料:<br>
+            {% for material in materials %}
+                {{ material.name }},
+            {% endfor %}
+        </div>
+
+        <br>
+
+        <div>
+            作り方:<br>
+            {{ menus.process | linebreaksbr }}
+        </div>
+    </body>
+</html>
