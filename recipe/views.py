@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.db.models import Q
+from django.core import serializers
 from .models import Menu, Genre, Small_Genre, Material, Menu_Material
 
 def index(request):
@@ -30,7 +31,7 @@ def index(request):
                 # result画面に返すレシピに加える
                 recipes_list.append(recipe)
 
-        # レシピをjson型にして返す
+        # レシピを返す
         return render(request, 'recipe/result.html', {'recipes':recipes_list})
 
     else:   # GET方式でアクセスされた場合
@@ -45,10 +46,16 @@ def index(request):
             materials_list.extend(list(materials_query_set.values()))
         # 抽出した辞書型のリストをモデルkeyの辞書型に格納
         materials_to_search = {'genres_list':genres_list, 'small_genres_list':small_genres_list, 'materials_list':materials_list}
-        print(materials_to_search)
+        # print(materials_to_search)
         return render(request, 'recipe/index.html', materials_to_search)
+
 
 def detail(request, menu_id):
     menus = Menu.objects.get(id = menu_id)
-    materials = menus.material_set.all()
-    return render(request, 'recipe/detail.html',{'menus':menus, 'materials': materials})
+    materials = []
+    search_keys = list(Menu_Material.objects.filter(menu=menu_id).values('material', 'amount'))
+    for key in search_keys:
+        material_name = str(Material.objects.get(id=key['material']))
+        materials.append({'name':material_name, 'amount':key['amount']})
+
+    return render(request, 'recipe/detail.html',{'menus':menus,'materials':materials})

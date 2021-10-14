@@ -17,7 +17,7 @@
         </div>
 
         <div>
-            コスト{{menus.cost}}円
+            コスト{{menus.cost }}円
         </div>
 
         <div>
@@ -41,7 +41,8 @@
         <div>
             材料:<br>
             {% for material in materials %}
-                {{ material.name }},
+                {{ material.name }}
+                {{ material.amount }}
             {% endfor %}
         </div>
 
