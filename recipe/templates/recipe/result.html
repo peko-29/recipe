@@ -4,23 +4,39 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- bootstrap5.0 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
         <title>検索結果</title>
     </head>
 
-    <body>
-        <div>
-            <!--idの0は画像、1はレシピ名にあたるため2から-->
-            <button type="submit" id="2" data-sort="">カロリー</button>
-            <button type="submit" id="3" data-sort="">価格</button>
-            <button type="submit" id="4" data-sort="">時間</button>
-            <button type="submit" id="5" data-sort="">タンパク量</button>
-        </div>
+    <style>
+        @media screen and (max-width: 767px) {
+            .table td:before {
+                content: attr(data-label);
+                float: left;
+                margin-right: 10px;
+            }
+        }
+    </style>
 
-        <!--レシピ一覧-->
-        <div id="app">
-            <table>
+    <body>
+        <div class="container">
+            <div class="row py-3">
+                <!--idの0は画像、1はレシピ名にあたるため2から-->
+                <button type="submit" class="col-md-2 m-1 btn btn-primary" id="2" data-sort="">カロリー</button>
+                <button type="submit" class="col-md-2 m-1 btn btn-primary" id="3" data-sort="">価格</button>
+                <button type="submit" class="col-md-2 m-1 btn btn-primary" id="4" data-sort="">時間</button>
+                <button type="submit" class="col-md-2 m-1 btn btn-primary" id="5" data-sort="">タンパク量</button>
+
+                <a href="/" class="col-md-2 mx-1 my-1 btn btn-danger">検索画面に戻る</a>
+            </div>
+
+            <!--レシピ一覧-->
+            <table class="table table-striped table-borderless">
                 <thead>
-                    <tr>
+                    <tr class="d-none d-md-table-row">
                         <th></th>
                         <th>レシピ名</th>
                         <th>カロリー(kcal)</th>
@@ -32,16 +48,16 @@
                 <tbody>
                     {% for recipe in recipes %}
                         <tr>
-                            <td>
+                            <td class="d-block d-md-table-cell">
                                 <a href="{% url 'recipe:detail' recipe.id %}">
                                     <img src="/{{ recipe.img }}" style="width: 200px; height: auto;">
                                 </a>
                             </td>
-                            <td>{{ recipe.name }}</td>
-                            <td>{{ recipe.cal }}</td>
-                            <td>{{ recipe.cost }}</td>
-                            <td>{{ recipe.time }}</td>
-                            <td>{{ recipe.protein }}</td>
+                            <td class="d-block d-md-table-cell">{{ recipe.name }}</td>
+                            <td class="d-block d-md-table-cell" data-label="カロリー(kcal):">{{ recipe.cal }}</td>
+                            <td class="d-block d-md-table-cell" data-label="価格(円):">{{ recipe.cost }}</td>
+                            <td class="d-block d-md-table-cell" data-label="時間(分):">{{ recipe.time }}</td>
+                            <td class="d-block d-md-table-cell" data-label="タンパク量(g):">{{ recipe.protein }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
