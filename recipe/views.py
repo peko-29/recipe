@@ -49,5 +49,10 @@ def index(request):
 
 def detail(request, menu_id):
     menus = Menu.objects.get(id = menu_id)
-    materials = menus.material_set.all()
-    return render(request, 'recipe/detail.html',{'menus':menus, 'materials': materials})
+    materials = []
+    search_keys = list(Menu_Material.objects.filter(menu=menu_id).values('material', 'amount'))
+    for key in search_keys:
+        material_name = str(Material.objects.get(id=key['material']))
+        materials.append({'name':material_name, 'amount':key['amount']})
+
+    return render(request, 'recipe/detail.html',{'menus':menus,'materials':materials})

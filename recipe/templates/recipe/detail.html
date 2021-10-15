@@ -3,53 +3,157 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
         <title>{{ menus.name }}</title>
+
+        <style type="text/css">
+        @media screen and (max-width: 500px) {
+        body
+        {
+            font-size: 14px!important;
+        }
+        .main
+        {
+            padding-top:20px!important;
+            width:90%!important;
+            text-align:left;
+        }
+        .menu_name {
+            font-size:26px!important;
+        }
+        /*.howto_make{*/
+        /*    padding-top:10px;*/
+        /*}*/
+        .materials{
+            padding-top:14px;
+        }
+        .nutrition_info{
+            padding-top:14px;
+        }
+
+
+
+        }
+
+        body{
+            height:100%;
+            font-size: 18px;
+            font-weight: 400;
+            font-family: 'Lato', 'Noto Sans Japanese', sans-serif;
+            text-align:center;
+        }
+        .main{
+            padding-top:40px;
+            width:55%;
+            margin:0 auto 80px auto;
+        }
+
+        .menu_img{
+            height:400px;
+            width:100%;
+        }
+
+        .sub_title{
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .menu_name{
+            font-size:34px;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        .fa-clock{
+            padding-left:14px;
+        }
+
+        .nutrition_info{
+            padding-top:26px;
+        }
+
+        .nut{
+            padding-right:10px;
+        }
+
+        .howto_make p{
+            text-align:left;
+        }
+
+        .material_name {
+            float:left;
+            clear: left;
+
+        }
+
+        .material_amount{
+            float:right;
+        }
+
+        .howto_make {
+            clear: left;
+        }
+
+        .material_detail{
+            border-bottom: #e5e5e5 solid 1px;
+            padding-bottom:5px;
+            margin-bottom:12px;
+        }
+        .materials{
+            padding-top:26px;
+        }
+
+        </style>
     </head>
 
     <body>
-        <div>
-            <img src="/{{ menus.img }}" style="width: 200px; height: auto;">
-        </div>
+        <div class = "main">
+                <div>
+                    <img src="/{{ menus.img }}"  class ="menu_img">
+                </div>
+                <div>
+                    <h2 class = "menu_name">{{ menus.name }}</h2>
+                    <div class = "cost_time">
+                        <i class="fas fa-coins"></i>
+                        {{ menus.cost }}円
 
-        <div>
-            {{menus.name }}
-        </div>
+                        <i class="far fa-clock"></i>
+                        {{ menus.time }}分
+                    </div>
+                </div>
 
-        <div>
-            コスト{{menus.cost}}円
-        </div>
 
-        <div>
-            時間{{menus.time }}分
-        </div>
 
-        <div>
-            タンパク質{{menus.protein }}g
-        </div>
+                <div class = "nutrition_info">
+                    <h3 class = "sub_title">栄養情報</h3>
+                    <span class = "nut">・タンパク質 {{ menus.protein }}g</span>
+                    <span class = "nut">・脂質 {{ menus.fat }}g</span>
+                    <span class = "nut">・炭水化物 {{ menus.carbohydrate }}g</span>
+                    <span class = "nut">・カロリー {{ menus.cal }}kcal</span>
+                </div>
 
-        <div>
-            脂質{{menus.fat }}g
-        </div>
 
-        <div>
-            炭水化物{{menus.carbohydrate}}g
-        </div>
+                <div class = "materials">
+                    <h3 class = "sub_title">材料（1人分）</h3>
+                    <div class = "material">
+                        {% for material in materials %}
+                        <div class = "material_detail">
+                            <span class =  "material_name">{{ material.name }}</span>
+                            <span class = "material_amount">{{ material.amount }}</span>
+                            </br>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
 
-        <br>
+                <br>
 
-        <div>
-            材料:<br>
-            {% for material in materials %}
-                {{ material.name }},
-            {% endfor %}
-        </div>
+                <div class = "howto_make">
+                    <h3 class = "sub_title">作り方</h3>
+                    <p>{{ menus.process | linebreaksbr }}</p>
 
-        <br>
-
-        <div>
-            作り方:<br>
-            {{ menus.process | linebreaksbr }}
-        </div>
+                </div>
+            </div>
     </body>
 </html>
