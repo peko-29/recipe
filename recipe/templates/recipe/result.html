@@ -8,27 +8,88 @@
     </head>
 
     <body>
-        <!--ソートボタン-->
         <div>
-            <button type="submit">カロリー</button>
-            <button type="submit">価格</button>
-            <button type="submit">時間</button>
-            <button type="submit">タンパク量</button>
+            <!--idの0は画像、1はレシピ名にあたるため2から-->
+            <button type="submit" id="2" data-sort="">カロリー</button>
+            <button type="submit" id="3" data-sort="">価格</button>
+            <button type="submit" id="4" data-sort="">時間</button>
+            <button type="submit" id="5" data-sort="">タンパク量</button>
         </div>
 
-        <!--検索に一致したレシピを表示-->
-        <div>
-            {% for recipe in recipes %}
-                <a href="{% url 'recipe:detail' recipe.id %}">
-                    <img src="/{{ recipe.img }}" style="width: 200px; height: auto;"> <br>
-                    {{ recipe.name}} <br>
-                    {{ recipe.cal }}カロリー <br>
-                    {{ recipe.cost }}円 <br>
-                    {{ recipe.time }}分 <br>
-                    {{ recipe.protein }}g <br>
-                </a>
-
-            {% endfor %}
+        <!--レシピ一覧-->
+        <div id="app">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>レシピ名</th>
+                        <th>カロリー(kcal)</th>
+                        <th>価格(円)</th>
+                        <th>時間(分)</th>
+                        <th>タンパク量(g)</th>
+                	</tr>
+                </thead>
+                <tbody>
+                    {% for recipe in recipes %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'recipe:detail' recipe.id %}">
+                                    <img src="/{{ recipe.img }}" style="width: 200px; height: auto;">
+                                </a>
+                            </td>
+                            <td>{{ recipe.name }}</td>
+                            <td>{{ recipe.cal }}</td>
+                            <td>{{ recipe.cost }}</td>
+                            <td>{{ recipe.time }}</td>
+                            <td>{{ recipe.protein }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+            $(function(){
+                // クリックアクション
+                $('button').click(function(){
+                    let ele = $(this).attr('id');
+                    let sortFlg = $(this).data('sort');
+
+                    // リセット
+                    $('button').data('sort', "");
+
+                    // ソート順序
+                    if(sortFlg == "" || sortFlg == "desc"){
+                        sortFlg = "asc";
+                        $(this).data('sort', "asc");
+
+                    }else{
+                        sortFlg = "desc";
+                        $(this).data('sort', "desc");
+                    }
+
+                    // テーブルソート処理
+                    sortTable(ele, sortFlg);
+                });
+
+                // ソート機能
+                function sortTable(ele, sortFlg){
+                    let arr = $('table tbody tr').sort(function(a, b){
+                        if($.isNumeric($(a).find('td').eq(ele).text())){
+                            let aNum = Number($(a).find('td').eq(ele).text());
+                            let bNum = Number($(b).find('td').eq(ele).text());
+                            if(sortFlg == "asc"){
+                                return aNum - bNum;
+                            }else{
+                                return bNum - aNum;
+                            }
+                        }
+                    });
+                    $('table tbody').html(arr);
+                }
+            });
+        </script>
     </body>
 </html>
