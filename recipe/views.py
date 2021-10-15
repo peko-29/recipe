@@ -30,7 +30,7 @@ def index(request):
                 # result画面に返すレシピに加える
                 recipes_list.append(recipe)
 
-        # レシピをjson型にして返す
+        # レシピを返す
         return render(request, 'recipe/result.html', {'recipes':recipes_list})
 
     else:   # GET方式でアクセスされた場合
@@ -42,7 +42,7 @@ def index(request):
         materials_list = []
         for small_genre in small_genres_query_set:
             materials_query_set = small_genre.material_set.all()
-            materials_list.append(list(materials_query_set.values()))
+            materials_list.extend(list(materials_query_set.values()))
         # 抽出した辞書型のリストをモデルkeyの辞書型に格納
         materials_to_search = {'genres_list':genres_list, 'small_genres_list':small_genres_list, 'materials_list':materials_list}
         return render(request, 'recipe/index.html', materials_to_search)
