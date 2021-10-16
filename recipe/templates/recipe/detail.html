@@ -5,149 +5,182 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+        <!-- bootstrap5.0 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
         <title>{{ menus.name }}</title>
 
         <style type="text/css">
-        @media screen and (max-width: 500px) {
-        body
-        {
-            font-size: 14px!important;
-        }
-        .main
-        {
-            padding-top:20px!important;
-            width:90%!important;
-            text-align:left;
-        }
-        .menu_name {
-            font-size:26px!important;
-        }
+            @media screen and (max-width: 500px) {}
+            body
+            {
+                font-size: 14px!important;
+            }
+            .main
+            {
+                padding-top:20px!important;
+                width:90%!important;
+                text-align:left;
+            }
 
-        .materials{
-            padding-top:14px;
-        }
-        .nutrition_info{
-            padding-top:14px;
-        }
-        }
+            .materials{
+                padding-top:7px;
+            }
+            .nutrition_info{
+                padding-top:7px;
+            }
 
-        body{
-            height:100%;
-            font-size: 18px;
-            font-weight: 400;
-            font-family: 'Lato', 'Noto Sans Japanese', sans-serif;
-            text-align:center;
-        }
-        .main{
-            padding-top:40px;
-            width:55%;
-            margin:0 auto 80px auto;
-        }
+            body{
+                height:100%;
+                font-size: 18px;
+                font-weight: 400;
+                font-family: 'Lato', 'Noto Sans Japanese', sans-serif;
+                text-align:center;
+            }
+            .main{
+                padding-top:40px;
+                width:55%;
+                margin:0 auto 80px auto;
+            }
 
-        .menu_img{
-            height:auto;
-            width:100%;
-        }
+            .menu_img{
+                height:auto;
+                width:70%;
+                display: block;
+                margin: auto;
+            }
 
-        .sub_title{
-            margin-bottom: 10px;
-            font-size: 20px;
-            font-weight: 600;
-        }
+            .sub_title{
+                margin:5px;
+                font-size: 20px;
+                font-weight: 600;
+            }
 
-        .menu_name{
-            font-size:34px;
-            font-weight: 400;
-            line-height: 1.4;
-        }
-        .fa-clock{
-            padding-left:14px;
-        }
+            .menu_name{
+                font-size:20px!important;
+                font-weight: 600;
+                line-height: 1.4;
+                text-align:center;
+                margin: 5px;
+            }
 
-        .nutrition_info{
-            padding-top:26px;
-        }
+            .cost_time{
+                text-align:center;
+            }
 
-        .nut{
-            padding-right:10px;
-            display: inline-block;
-        }
+            .fa-clock{
+                padding-left:14px;
+            }
 
-        .howto_make p{
-            text-align:left;
-        }
+            .nutrition_info{
+                padding-top:13px;
+            }
 
-        .material_name {
-            float:left;
-            clear: left;
+            .nut{
+                padding-right:10px;
+                display: inline-block;
+            }
 
-        }
+            .howto_make p{
+                text-align:left;
+            }
 
-        .material_amount{
-            float:right;
-        }
+            .material_name {
+                float:left;
+                clear: left;
 
-        .howto_make {
-            clear: left;
-        }
+            }
 
-        .material_detail{
-            border-bottom: #e5e5e5 solid 1px;
-            padding-bottom:5px;
-            margin-bottom:12px;
-        }
-        .materials{
-            padding-top:26px;
-        }
+            .material_amount{
+                float:right;
+            }
+
+            .howto_make {
+                clear: left;
+            }
+
+            .material_detail{
+                border-bottom: #e5e5e5 solid 1px;
+                padding-bottom:5px;
+                margin-bottom:6px;
+            }
+            .materials{
+                padding-top:13px;
+            }
+
+            p{
+                margin:5px;
+            }
+
+            .btn-primary {
+                background-color: #ffa500;
+                border-color: #ffa500;
+                width:50%;
+
+            }
+
+            .btn-primary:link, .btn-primary:visited, .btn-primary:active {
+                background-color: #ffa500;
+                border-color: #ffa500;
+            }
+            /*.btn-primary:hover {*/
+            /*    background-color: #c78916;*/
+            /*    border-color: #c78916;*/
+            /*}*/
 
         </style>
     </head>
 
     <body>
         <div class = "main">
-                <div>
-                    <img src="/{{ menus.img }}"  class ="menu_img">
-                </div>
-                <div>
-                    <h2 class = "menu_name">{{ menus.name }}</h2>
-                    <div class = "cost_time">
-                        <i class="fas fa-coins"></i>
-                        {{ menus.cost }}円
+            <div>
+                <img src="/{{ menus.img }}"  class ="menu_img">
+            </div>
+            <div>
+                <h2 class = "menu_name">{{ menus.name }}</h2>
+                <div class = "cost_time">
+                    <i class="fas fa-coins"></i>
+                    {{ menus.cost }}円
 
-                        <i class="far fa-clock"></i>
-                        {{ menus.time }}分
-                    </div>
-                </div>
-
-                <div class = "nutrition_info">
-                    <h3 class = "sub_title">栄養情報</h3>
-                    <span class = "nut">・タンパク質 {{ menus.protein }}g</span>
-                    <span class = "nut">・脂質 {{ menus.fat }}g</span>
-                    <span class = "nut">・炭水化物 {{ menus.carbohydrate }}g</span>
-                    <span class = "nut">・カロリー {{ menus.cal }}kcal</span>
-                </div>
-
-
-                <div class = "materials">
-                    <h3 class = "sub_title">材料（1人分）</h3>
-                    <div class = "material">
-                        {% for material in materials %}
-                        <div class = "material_detail">
-                            <span class =  "material_name">{{ material.name }}</span>
-                            <span class = "material_amount">{{ material.amount }}</span>
-                            </br>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <br>
-
-                <div class = "howto_make">
-                    <h3 class = "sub_title">作り方</h3>
-                    <p>{{ menus.process | linebreaksbr }}</p>
+                    <i class="far fa-clock"></i>
+                    {{ menus.time }}分
                 </div>
             </div>
 
+            <div class = "nutrition_info">
+                <h3 class = "sub_title">栄養情報</h3>
+                <span class = "nut">・タンパク質 {{ menus.protein }}g</span>
+                <span class = "nut">・脂質 {{ menus.fat }}g</span>
+                <span class = "nut">・炭水化物 {{ menus.carbohydrate }}g</span>
+                <span class = "nut">・カロリー {{ menus.cal }}kcal</span>
+            </div>
+
+
+            <div class = "materials">
+                <h3 class = "sub_title">材料（1人分）</h3>
+                <div class = "material">
+                    {% for material in materials %}
+                    <div class = "material_detail">
+                        <span class =  "material_name">{{ material.name }}</span>
+                        <span class = "material_amount">{{ material.amount }}</span>
+                        </br>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <br>
+
+            <div class = "howto_make">
+                <h3 class = "sub_title">作り方</h3>
+                <p>{{ menus.process | linebreaksbr }}</p>
+
+            </div>
+
+            <div class="row py-3 form-group row justify-content-center">
+                <a href="/" class="col-md-2 mx-1 my-1 btn btn-primary">検索画面に戻る</a>
+            </div>
+
+        </div>
     </body>
 </html>
