@@ -1,21 +1,548 @@
-<p>hello</p>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <!--<link rel="stylesheet" href="recipe/css/styles.css">-->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <title>pop</title>
+  </head>
 
-<form action="{% url 'recipe:index' %}" method="post">
-    {% csrf_token %}
-    <div class="form-group">
-        <p>テスト</p>
-        <label>
-            <input type="checkbox" name="materials" value=18 checked>
-            もやし
-        </label>
-        <label>
-            <input type="checkbox" name="materials" value=3 value="yes">
-            卵
-        </label>
-        <label>
-            <input type="checkbox" name="genres" value="others" value="yes">
-            そのほか
-        </label>
-        <button id="submit" type="submit">確かめる</button>
+  <body id="wrap">
+    <div id="app" class="continer">
+      <div class="genre-continer">
+        <span class="under-1">余り物から手軽に！レシピ</span>
+        
+       
+
+
+          <!-- genre button ・・・ ① -->
+          
+          <div class="genre-header">
+             <span class="under-2">食材から検索</span>
+             <!--検索バー -->
+            <div class="search-bar-continer">
+              <input type="button" value="src=./silver.png" id="search"class="search-bar"></input>
+              <!--<img class="search_png">-->
+            </div>
+          </div>
+          
+          <span id="test1"></span>
+
+            <!-- 大ジャンルボタン -->
+          <div class="genre-body-1">
+            {% for genre in genres_list %}
+              {% if genre.id == 1 %}
+               <input type="button" class="genre-button" id="btn1" value="{{ genre.name }}" onclick="cal1()" style="cursor:pointer;"> </input>
+              {% endif %}
+            {% endfor %}
+
+
+              {% for genre in genres_list %}
+              {% if genre.id == 2 %}
+               <input type="button" class="genre-button" id="btn2" value="{{ genre.name }}" onclick="cal2()" style="cursor:pointer;"> </input>
+              {% endif %}
+              {% endfor %}
+
+          </div>
+          <div class="genre-body-2">
+              {% for genre in genres_list %}
+              {% if genre.id == 3 %}
+              <input type="button" class="genre-button" id="btn3" value=" {{ genre.name }}" onclick="cal3()" style="cursor:pointer;"> </input>
+              {% endif %}
+              {% endfor %}
+
+
+              {% for genre in genres_list %}
+              {% if genre.id == 5 %}
+               <input type="button" class="genre-button" id="btn4" value=" {{ genre.name }}" onclick="cal4()" style="cursor:pointer;"></input>
+              {% endif %}
+              {% endfor %}
+           </div>   
+          
+      </div>
+
+
+
+
+       <!--ポップアップ部分（モーダル） ・・・ ② -->
+      <form action="{% url 'recipe:index' %}" method="post" >
+        {% csrf_token %}
+
+        <!-- 検索ボタン -->
+        <button type="submit" class="search-button" disabled id="submit" value="a"></button>
+        
+
+
+        <div id="overlay1" class="overlay">
+          <div id="content">
+
+            <!--閉じるボタン-->
+            <input type="button" class="close-button" id="closeBtn1"  value="&times;"  style="cursor:pointer;" ></input>
+
+             <!--小ジャンルボタン -->
+
+            {% for small in small_genres_list %}
+              {% if small.genre_id == 1 %}
+               <input type="button" value="{{ small.name }}" class="small-button"  style="cursor:pointer;" ></input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 1 %}
+               <input type="checkbox" name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 13 %}
+               <input type="checkbox"name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 15 %}
+               <input type="checkbox" name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+
+          </div>
+        </div>
+
+        <div id="overlay2" class="overlay">
+          <div id="content">
+
+            <!--閉じるボタン-->
+            <input type="button" class="close-button" id="closeBtn2"  value="&times;"  style="cursor:pointer;" ></input>
+
+             <!--小ジャンルボタン -->
+
+            {% for small in small_genres_list %}
+              {% if small.genre_id == 2 %}
+               <input type="button" value="{{ small.name }}" class="small-button"  style="cursor:pointer;" ></input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 2 %}
+               <input type="checkbox"name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 12 %}
+               <input type="checkbox"name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+
+          </div>
+        </div>
+
+        <div id="overlay3" class="overlay">
+          <div id="content">
+
+            <!--閉じるボタン-->
+            <input type="button" class="close-button" id="closeBtn3"  value="&times;"  style="cursor:pointer;" ></input>
+
+             <!--小ジャンルボタン -->
+
+            {% for small in small_genres_list %}
+              {% if small.genre_id == 3 %}
+               <input type="button" value="{{ small.name }}" class="small-button"  style="cursor:pointer;" ></input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 3 %}
+               <input type="checkbox" name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 18 %}
+               <input type="checkbox" name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 22 %}
+               <input type="checkbox" name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 23 %}
+               <input type="checkbox"name="materials"  value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 25 %}
+               <input type="checkbox" name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 27 %}
+               <input type="checkbox" name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 30 %}
+               <input type="checkbox" name="materials"  value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 39 %}
+               <input type="checkbox" name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 41 %}
+               <input type="checkbox" name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div id="overlay4" class="overlay">
+          <div id="content">
+
+            <!--閉じるボタン-->
+            <input type="button" class="close-button" id="closeBtn4"  value="&times;"  style="cursor:pointer;" ></input>
+
+             <!--小ジャンルボタン -->
+
+            {% for small in small_genres_list %}
+              {% if small.genre_id == 5 %}
+               <input type="button" value="{{ small.name }}" class="small-button"  style="cursor:pointer;" ></input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 14 %}
+               <input type="checkbox" name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+            {% for material in materials_list %}
+              {% if material.small_genre_id == 17 %}
+               <input type="checkbox" name="materials" value="{{ material.id }}" class="material-button"  style="cursor:pointer;" onclick="getValue()">{{ material.name }}</input>
+              {% endif %}
+            {% endfor %}
+
+
+
+          </div>
+        </div>
+      </form>
     </div>
-</form>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+    var submit = document.getElementById("submit")
+     submit.disabled = true;
+    function getValue() {
+
+      var select =
+      submit.disabled = false;
+    }
+
+
+    // function getValue() {
+    // var x = document.getElementById("test1");
+    // x.innerHTML = "JavaScriptで追加";
+    // }
+
+
+      function cal1() {
+        // console.log(document.getElementById("btn1").value);
+        var btn1 = document.getElementById('btn1');
+        btn1.addEventListener('click', function() {
+        modal.style.display = 'block';
+        })
+
+        var modal = document.getElementById('overlay1');
+        var closeBtn = document.getElementById('closeBtn1');
+
+        closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      })
+
+      window.addEventListener('click', function(e) {
+        if (e.target == modal) {
+          modal.style.display = 'none';
+        }
+      });
+      }
+
+
+      function cal2() {
+        // console.log(document.getElementById("btn2").value);
+        var btn2 = document.getElementById('btn2');
+        btn2.addEventListener('click', function() {
+        modal.style.display = 'block';
+      })
+
+      var modal = document.getElementById('overlay2');
+      var closeBtn = document.getElementById('closeBtn2');
+
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      })
+
+      window.addEventListener('click', function(e) {
+        if (e.target == modal) {
+          modal.style.display = 'none';
+        }
+      });
+      }
+
+
+      function cal3() {
+        // console.log(document.getElementById("btn3").value);
+        var btn3 = document.getElementById('btn3');
+        btn3.addEventListener('click', function() {
+        modal.style.display = 'block';
+      })
+
+      var modal = document.getElementById('overlay3')
+      var closeBtn = document.getElementById('closeBtn3');
+
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      })
+
+      window.addEventListener('click', function(e) {
+        if (e.target == modal) {
+          modal.style.display = 'none';
+        }
+      });
+      }
+
+
+      function cal4() {
+        // console.log(document.getElementById("btn4").value);
+        var btn4 = document.getElementById('btn4');
+        btn4.addEventListener('click', function() {
+        modal.style.display = 'block';
+        })
+
+      var modal = document.getElementById('overlay4');
+      var closeBtn = document.getElementById('closeBtn4');
+
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      })
+
+      window.addEventListener('click', function(e) {
+        if (e.target == modal) {
+          modal.style.display = 'none';
+        }
+      });
+      }
+
+
+
+
+    </script>
+
+    <style>
+    body {
+      /* font-size: 16px; */
+      font-family: Verdana, sans-serif;
+      width: 100%;
+      /*height: 900px;*/
+      text-align:center;
+      
+    }
+    
+    #wrap{ 
+      width: 960px;	   /*全体の幅を指定する*/  
+      
+      margin: 0 auto;    /*マージンの指定をする、ブラウザ対策*/
+      text-align:left;   /*全体を左揃えにする。*/
+      margin-top: 50px;
+    }
+
+    
+
+    .under-1 {
+      border-bottom: 3px solid #ffa500;
+      font-size: 30px;
+      
+    }
+
+    .under-2 {
+      border-bottom: 3px solid #999;
+      font-size: 30px;
+      
+    }
+
+    /* 検索バー */
+    .genre-header {
+       margin-top: 50px;
+    }
+    
+    .search-bar-continer {
+       margin-top: 30px;
+    }
+    
+    .search-bar {
+      border: 3px solid #999;
+      width: 850px;
+      height: 50px;
+      margin: 0 50px;
+    }
+    
+    .search_png {
+      width: 50px;
+      height: 50px;
+    }
+
+    /* 検索ボタン */
+    .search-button {
+      z-index: 3;
+      width: 150px;
+      height: 150px;
+      position: relative;
+      border: solid #2a72f8 15px;
+      border-radius: 50%;
+      box-sizing: border-box;
+      position: fixed;            /* ヘッダーの固定 */
+      bottom: 30px;                   /* 位置(上0px) */
+      right: 30px;
+
+    }
+
+    .search-button::before {
+      content: "";
+      width: 110px;
+      height: 110px;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      border: solid #2a72f8 15px;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+
+    .search-continer {
+      margin: 0 0 0 auto;
+    }
+
+    /*ジャンルボタン*/
+    .genre-body {
+      display: inline-flex;
+      
+    }
+    
+  
+    .genre-button {
+      /* position: absolute; */
+    	/* top: 50%; */
+    	/* left: 50%; */
+    	/* transform: translate(-50%, -50%); */
+      background: rgb(255, 255, 255);
+      border: 5px solid#db8dff;
+      font-size: 30px;
+      width: 400px;
+      height: 200px;
+      margin: 50px 0px 50px 50px;
+    }
+
+    /*小ジャンルボタン*/
+    .small-button {
+      background: #8deeff;
+      color: #333; /* 文字色を黒に */
+      font-size: 14px; /* 文字サイズを14pxに */
+      border: 1px solid #33e0ff	; /* 淵の線を指定 */
+      border-radius: 20px; /* 角丸を入れて、左右が丸いボタンにする */
+      padding: 5px 20px; /* 上下左右に余白をトル */
+    }
+
+
+
+    /*ポップアップ*/
+    .overlay{
+      /*　要素を重ねた時の順番　*/
+      z-index:1;
+
+      /*　画面全体を覆う設定　*/
+      display: none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background-color:rgba(0,0,0,0.5);
+
+      　/*画面の中央に要素を表示させる設定　*/
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    #content{
+      z-index:2;
+      width: 50%;
+      margin: 30% auto;
+      padding: 1em;
+      background:#CCFFFF;
+      border-radius: 20px;
+    }
+
+    /*閉じるボタン*/
+    .close-button {
+      margin: 0 0 0 auto;
+      font-size: 20px;/*ボタンの大きさ*/
+      font-weight: bold;
+      border: 1px solid #999;
+      color: #999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100%;
+      width: 1.3em;
+      line-height: 1.3em;
+      cursor: pointer;
+      transition: .2s;
+      background-color: #FFF;
+    }
+
+    .close-button:hover {
+      background: #333;
+      border-color: #333;
+      color: #FFF;
+    }
+
+
+    /*ポップアップのアニメーション*/
+    @keyframes grow {
+      from {
+          font-size: 0px;
+      }
+      to {
+          font-size: 20px;
+      }
+    }
+
+    #content {
+      animation-name: grow;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+    }
+
+
+    </style>
+  </body>
+</html>
