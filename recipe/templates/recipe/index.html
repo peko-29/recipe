@@ -6,35 +6,38 @@
     <!--<link rel="stylesheet" href="recipe/css/styles.css">-->
     <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-    <title>pop</title>
+    <title>検索画面</title>
   </head>
 
   <body id="wrap">
     <div id="app" class="continer">
       <div class="genre-continer">
-        <span class="under-1">余り物から手軽に！レシピ</span>
-        
-       
+        <div class="title">
+          <span class="under-1">余り物から手軽に！レシピ</span>
+          <img src="/images/silver.png" class="silver_png">
+        </div>
+
 
 
           <!-- genre button ・・・ ① -->
-          
-          <div class="genre-header">
-             <span class="under-2">食材から検索</span>
+
+          <!--<div class="genre-header">-->
+          <!--   <span class="under-2">食材から検索</span>-->
+          <!--   <img src="/images/search.png" class="silver_png">-->
              <!--検索バー -->
-            <div class="search-bar-continer">
-              <input type="button"  id="search"class="search-bar"></input>
-              <!--<img src=./silver.png" class="search_png">-->
-            </div>
-          </div>
-          
+          <!--  <div class="search-bar-continer">-->
+          <!--    <input type="button"  id="search"class="search-bar"></input>-->
+              
+          <!--  </div>-->
+          <!--</div>-->
+
           <span id="test1"></span>
 
             <!-- 大ジャンルボタン -->
           <div class="genre-body-1">
             {% for genre in genres_list %}
               {% if genre.id == 1 %}
-               <input type="button" class="genre-button" id="btn1" value="{{ genre.name }}" onclick="cal1()" style="cursor:pointer;"> </input>
+               <input type="button" class="genre-button" id="btn1" value="{{ genre.name }}" onclick="cal1()" style="cursor:pointer;"></input>
               {% endif %}
             {% endfor %}
 
@@ -59,8 +62,8 @@
                <input type="button" class="genre-button" id="btn4" value=" {{ genre.name }}" onclick="cal4()" style="cursor:pointer;"></input>
               {% endif %}
               {% endfor %}
-           </div>   
-          
+           </div>
+
       </div>
 
 
@@ -72,7 +75,7 @@
 
         <!-- 検索ボタン -->
         <button type="submit" class="search-button" disabled id="submit" value="a"></button>
-        
+
 
 
         <div id="overlay1" class="overlay">
@@ -357,53 +360,76 @@
     </script>
 
     <style>
+    @media screen and (max-width: 767px) {
+     
+     
+     }
+    
     body {
-      /* font-size: 16px; */
+       font-size: 16px; 
       font-family: Verdana, sans-serif;
       width: 100%;
       /*height: 900px;*/
       text-align:center;
       
     }
-    
-    #wrap{ 
-      width: 960px;	   /*全体の幅を指定する*/  
-      
+
+    #wrap{
+      width: 960px;	   /*全体の幅を指定する*/
+
       margin: 0 auto;    /*マージンの指定をする、ブラウザ対策*/
       text-align:left;   /*全体を左揃えにする。*/
       margin-top: 50px;
     }
 
-    
+    /*タイトル*/
+    .title {
+      
+      text-align: center;
+    }
 
     .under-1 {
       border-bottom: 3px solid #ffa500;
       font-size: 30px;
       
+       height:20px;
+       vertical-align:baseline;
     }
+
+    /*画像*/
+    .silver_png {
+      
+      width: 40px;
+      height: 40px;
+      vertical-align:baseline;
+    }
+
 
     .under-2 {
       border-bottom: 3px solid #999;
       font-size: 30px;
-      
+
     }
 
     /* 検索バー */
     .genre-header {
        margin-top: 50px;
+      
     }
-    
+
     .search-bar-continer {
        margin-top: 30px;
+      
     }
-    
+
     .search-bar {
       border: 3px solid #999;
+      border-radius: 10px;
       width: 850px;
       height: 50px;
       margin: 0 50px;
     }
-    
+
     .search_png {
       width: 50px;
       height: 50px;
@@ -443,10 +469,10 @@
     /*ジャンルボタン*/
     .genre-body {
       display: inline-flex;
-      
+
     }
-    
-  
+
+
     .genre-button {
       /* position: absolute; */
     	/* top: 50%; */
@@ -458,6 +484,7 @@
       width: 400px;
       height: 200px;
       margin: 50px 0px 50px 50px;
+      border-radius: 10px;
     }
 
     /*小ジャンルボタン*/
