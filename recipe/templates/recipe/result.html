@@ -12,25 +12,43 @@
     </head>
 
     <style>
+        .btn-primary {
+            background-color: #ffa500;
+            border-color: #ffa500;
+
+        }
+        .btn-primary:hover {
+            background-color: #ffa500;
+            border-color: #ffa500;
+        }
+        .btn-primary:focus {
+          background-color: #ffa500;
+          border-color: #ffffff;
+        }
+
         @media screen and (max-width: 767px) {
             .table td:before {
                 content: attr(data-label);
                 float: left;
                 margin-right: 10px;
             }
+            .btn {
+                width: 80%;
+            }
         }
     </style>
 
     <body>
         <div class="container">
-            <div class="row py-3">
+            <div class="row py-3 d-flex justify-content-center">
+                <a href="/" class="col-md-2 mx-1 my-1 btn btn-danger">検索画面に戻る</a>
                 <!--idの0は画像、1はレシピ名にあたるため2から-->
                 <button type="submit" class="col-md-2 m-1 btn btn-primary" id="2" data-sort="">カロリー</button>
                 <button type="submit" class="col-md-2 m-1 btn btn-primary" id="3" data-sort="">価格</button>
                 <button type="submit" class="col-md-2 m-1 btn btn-primary" id="4" data-sort="">時間</button>
                 <button type="submit" class="col-md-2 m-1 btn btn-primary" id="5" data-sort="">タンパク量</button>
 
-                <a href="/" class="col-md-2 mx-1 my-1 btn btn-danger">検索画面に戻る</a>
+
             </div>
 
             <!--レシピ一覧-->
