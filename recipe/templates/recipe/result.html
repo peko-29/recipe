@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>検索結果</title>
+    </head>
+
+    <body>
+        <!--ソートボタン-->
+        <div>
+            <button type="submit">カロリー</button>
+            <button type="submit">価格</button>
+            <button type="submit">時間</button>
+            <button type="submit">タンパク量</button>
+        </div>
+
+        <!--検索に一致したレシピを表示-->
+        <div>
+            {% for recipe in recipes %}
+                <a href="{% url 'recipe:detail' recipe.id %}">
+                    <img src="/{{ recipe.img }}" style="width: 200px; height: auto;"> <br>
+                    {{ recipe.name}} <br>
+                    {{ recipe.cal }}カロリー <br>
+                    {{ recipe.cost }}円 <br>
+                    {{ recipe.time }}分 <br>
+                    {{ recipe.protein }}g <br>
+                </a>
+
+            {% endfor %}
+        </div>
+    </body>
+</html>
