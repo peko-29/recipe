@@ -42,7 +42,7 @@
                 <div class="box-block">
                   {% for genre in genres_list %}
                     {% if genre.id == 1 %}
-                      
+
                      <p class="genre-text"><img src="/images/meat.png" class="genre_png">  {{ genre.name }}料理</p>
                     {% endif %}
                   {% endfor %}
@@ -59,7 +59,7 @@
                 <div class="box-block">
                   {% for genre in genres_list %}
                     {% if genre.id == 2 %}
-                     
+
                       <p class="genre-text"><img src="/images/vegetable.png" class="genre_png">  {{ genre.name }}料理</p>
                     {% endif %}
                   {% endfor %}
@@ -77,7 +77,7 @@
                 <div class="box-block">
                   {% for genre in genres_list %}
                     {% if genre.id == 3 %}
-                     
+
                      <p class="genre-text"><img src="/images/egg.png" class="genre_png">{{ genre.name }}の材料</p>
                     {% endif %}
                   {% endfor %}
@@ -93,7 +93,7 @@
                 <div class="box-block">
                   {% for genre in genres_list %}
                     {% if genre.id == 5 %}
-                      
+
                       <p class="genre-text"><img src="/images/potato.png" class="genre_png">{{ genre.name }}の材料</p>
                     {% endif %}
                   {% endfor %}
@@ -323,11 +323,55 @@
       </form>
     </div>
 
+    <!--<label for="test1" class="checkbox">-->
+    <!--<input type="checkbox" name="data[hogehoge][]" value="checked1" id="test1"> checkbox1-->
+    <!--</label>-->
+    <!--<label for="test2" class="checkbox">-->
+    <!--    <input type="checkbox" name="data[hogehoge][]" value="checked2" id="test1"> checkbox2-->
+    <!--</label>-->
+    <!--<label for="test3" class="checkbox">-->
+    <!--    <input type="checkbox" name="data[hogehoge][]" value="checked3" id="test3"> checkbox3-->
+    <!--</label>-->
+
+    <!--<input type="checkbox" name="company[]" value="1">-->
+    <!--<input type="checkbox" name="company[]" value="2">-->
+    <!--<input type="checkbox" name="company[]" value="3">-->
+
+    <!--<input type=checkbox class=material-button name=a>a-->
+    <!--<input type=checkbox class=material-button name=b>b<br>-->
+    <!--<input type=button id=btn_on value="オン">-->
+    <input type=button id=btn_off value="選択解除">
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
+
+    $(function(){
+        // $("#btn_on").click(function(){
+        //     $(".material-button").prop("checked", true);
+        // });
+        $("#btn_off").click(function(){
+            $(".material-button").prop("checked", false);
+        });
+    });
+    // var companys = $('input[name="company[]"]:checked').map(function(){
+    //   return $(this).val();
+
+    // }).get();
+
+    // console.log(companys);
+
+//     $('.checkbox input:checked').map(function() {
+//     value = $(this).val();
+//     console.log(value);
+// });
+
+
+
+
+
     var submit = document.getElementById("submit")
      submit.disabled = true;
     function getValue() {
@@ -335,6 +379,7 @@
       var select =
       submit.disabled = false;
     }
+
 
 
     // function getValue() {
@@ -430,6 +475,9 @@
       });
       }
 
+
+
+
     </script>
 
     <style>
@@ -474,11 +522,11 @@
        display: flex;
        -webkit-align-items: center;
         /*縦方向中央揃え（Safari用） */
-       align-items: center; 
+       align-items: center;
         /*縦方向中央揃え */
-       -webkit-justify-content: center; 
+       -webkit-justify-content: center;
         /*横方向中央揃え（Safari用） */
-       justify-content: center; 
+       justify-content: center;
         /*横方向中央揃え */
     }
 
@@ -531,7 +579,6 @@
       position: fixed;
       /* ヘッダーの固定 */
       bottom: 30px;
-      /* 位置(上0px) */
       right: 30px;
     }
 
@@ -558,6 +605,20 @@
 
     .search-continer {
       margin: 0 0 0 auto;
+    }
+
+      /*全解除ボタン*/
+    #btn_off {
+      position: fixed;
+      z-index: 5;
+      width: 130px;
+      height: 50px;
+      /* ヘッダーの固定 */
+      bottom: 50px;
+      left: 30px;
+      border: solid #f7bb17 5px;
+      background: #fff;
+      font-size: 20px;
     }
 
     /*ジャンルボタン*/
@@ -589,8 +650,8 @@
       margin-right: 10px;
       margin: 0;
       }
-      
-      
+
+
     .box-block {
       position: relative;
       padding: 0;
@@ -847,6 +908,20 @@
       margin: 0 0 0 auto;
     }
 
+     /*全解除ボタン*/
+    #btn_off {
+      position: fixed;
+      z-index: 5;
+      width: 200px;
+      height: 80px;
+      /* ヘッダーの固定 */
+      bottom: 50px;
+      left: 30px;
+      border: solid #f7bb17 8px;
+      background: #fff;
+      font-size: 20px;
+    }
+
     /*ジャンルボタン*/
     .genre-body-1 {
       display: flex;
@@ -1012,7 +1087,7 @@
       animation-duration: 1s;
       animation-fill-mode: forwards;
     }
-    
+
     </style>
   </body>
 </html>
