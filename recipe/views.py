@@ -12,9 +12,8 @@ def index(request):
 
         dup_recipes_list = []
         for material in materials:
-            material = int(material)
             # マテリアル→レシピの検索(材料1つずつ)
-            material_relate_recipe = Material.objects.get(pk=material)
+            material_relate_recipe = Material.objects.get(name=material)
             recipe_query = material_relate_recipe.menu.all()
             # 検索結果をlist型に変換
             recipe_list = list(recipe_query.values())
