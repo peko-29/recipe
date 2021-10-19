@@ -105,9 +105,7 @@
         </div>
     </div>
 
-        <!-- 検索ボタン -->
-        <button type="submit" class="search-button" disabled id="submit" value="a"></button>
-        <input type=button id=btn_off value="選択解除">
+
 
 
 
@@ -115,7 +113,9 @@
       <form action="{% url 'recipe:index' %}" method="post" >
         {% csrf_token %}
 
-
+        <!-- 検索ボタン -->
+        <button type="submit" class="search-button" disabled id="submit" value="a"></button>
+        <input type=button id=btn_off value="選択解除">
 
 
         <div id="overlay1" class="overlay">
@@ -326,11 +326,6 @@
         </div>
       </form>
     </div>
-
-
-
-
-
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
