@@ -32,77 +32,82 @@
           <span id="test1"></span>
 
           <!-- 大ジャンルボタン -->
-          <div class="genre-body-1">
-            <div id="box01" class="box-outer">
-              <input type="button" class="genre-button" id="btn1" value="{{ genre.name }}" onclick="cal1()" style="cursor:pointer;"></input>
-              <div class="circle top-left"></div>
-              <div class="circle top-rigt"></div>
-              <div class="circle btm-left"></div>
-              <div class="circle btm-rigt"></div>
-                <div class="box-block">
-                  {% for genre in genres_list %}
-                    {% if genre.id == 1 %}
+          <div class="genre-body">
+            <div class="genre-body-1">
+              <div id="box01" class="box-outer">
+                <input type="button" class="genre-button" id="btn1" value="{{ genre.name }}" onclick="cal1()" style="cursor:pointer;"></input>
+                <div class="circle top-left"></div>
+                <div class="circle top-rigt"></div>
+                <div class="circle btm-left"></div>
+                <div class="circle btm-rigt"></div>
+                  <div class="box-block">
+                    {% for genre in genres_list %}
+                      {% if genre.id == 1 %}
 
-                     <p class="genre-text"><img src="/images/meat.png" class="genre_png">  {{ genre.name }}料理</p>
-                    {% endif %}
-                  {% endfor %}
-                </div>
+                       <p class="genre-text"><img src="/images/meat.png" class="genre_png">  {{ genre.name }}料理</p>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+              </div>
+
+
+              <div id="box01" class="box-outer">
+                <input type="button" class="genre-button" id="btn2" value="{{ genre.name }}" onclick="cal2()" style="cursor:pointer;"> </input>
+                <div class="circle top-left"></div>
+                <div class="circle top-rigt"></div>
+                <div class="circle btm-left"></div>
+                <div class="circle btm-rigt"></div>
+                  <div class="box-block">
+                    {% for genre in genres_list %}
+                      {% if genre.id == 2 %}
+
+                        <p class="genre-text"><img src="/images/vegetable.png" class="genre_png">  {{ genre.name }}料理</p>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+              </div>
             </div>
 
+            <div class="genre-body-1">
+              <div id="box01" class="box-outer">
+                <input type="button" class="genre-button" id="btn3" value=" {{ genre.name }}" onclick="cal3()" style="cursor:pointer;"> </input>
+                <div class="circle top-left"></div>
+                <div class="circle top-rigt"></div>
+                <div class="circle btm-left"></div>
+                <div class="circle btm-rigt"></div>
+                  <div class="box-block">
+                    {% for genre in genres_list %}
+                      {% if genre.id == 3 %}
 
-            <div id="box01" class="box-outer">
-              <input type="button" class="genre-button" id="btn2" value="{{ genre.name }}" onclick="cal2()" style="cursor:pointer;"> </input>
-              <div class="circle top-left"></div>
-              <div class="circle top-rigt"></div>
-              <div class="circle btm-left"></div>
-              <div class="circle btm-rigt"></div>
-                <div class="box-block">
-                  {% for genre in genres_list %}
-                    {% if genre.id == 2 %}
+                       <p class="genre-text"><img src="/images/egg.png" class="genre_png">{{ genre.name }}の材料</p>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+              </div>
 
-                      <p class="genre-text"><img src="/images/vegetable.png" class="genre_png">  {{ genre.name }}料理</p>
-                    {% endif %}
-                  {% endfor %}
-                </div>
-            </div>
+              <div id="box01" class="box-outer">
+                <input type="button" class="genre-button" id="btn4" value=" {{ genre.name }}" onclick="cal4()" style="cursor:pointer;"></input>
+                <div class="circle top-left"></div>
+                <div class="circle top-rigt"></div>
+                <div class="circle btm-left"></div>
+                <div class="circle btm-rigt"></div>
+                  <div class="box-block">
+                    {% for genre in genres_list %}
+                      {% if genre.id == 5 %}
+
+                        <p class="genre-text"><img src="/images/potato.png" class="genre_png">{{ genre.name }}の材料</p>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+              </div>
           </div>
-
-          <div class="genre-body-1">
-            <div id="box01" class="box-outer">
-              <input type="button" class="genre-button" id="btn3" value=" {{ genre.name }}" onclick="cal3()" style="cursor:pointer;"> </input>
-              <div class="circle top-left"></div>
-              <div class="circle top-rigt"></div>
-              <div class="circle btm-left"></div>
-              <div class="circle btm-rigt"></div>
-                <div class="box-block">
-                  {% for genre in genres_list %}
-                    {% if genre.id == 3 %}
-
-                     <p class="genre-text"><img src="/images/egg.png" class="genre_png">{{ genre.name }}の材料</p>
-                    {% endif %}
-                  {% endfor %}
-                </div>
-            </div>
-
-            <div id="box01" class="box-outer">
-              <input type="button" class="genre-button" id="btn4" value=" {{ genre.name }}" onclick="cal4()" style="cursor:pointer;"></input>
-              <div class="circle top-left"></div>
-              <div class="circle top-rigt"></div>
-              <div class="circle btm-left"></div>
-              <div class="circle btm-rigt"></div>
-                <div class="box-block">
-                  {% for genre in genres_list %}
-                    {% if genre.id == 5 %}
-
-                      <p class="genre-text"><img src="/images/potato.png" class="genre_png">{{ genre.name }}の材料</p>
-                    {% endif %}
-                  {% endfor %}
-                </div>
-            </div>
           </div>
         </div>
     </div>
 
+        <!-- 検索ボタン -->
+        <button type="submit" class="search-button" disabled id="submit" value="a"></button>
+        <input type=button id=btn_off value="選択解除">
 
 
 
@@ -110,8 +115,6 @@
       <form action="{% url 'recipe:index' %}" method="post" >
         {% csrf_token %}
 
-        <!-- 検索ボタン -->
-        <button type="submit" class="search-button" disabled id="submit" value="a"></button>
 
 
 
@@ -197,6 +200,7 @@
             </div>
           </div>
         </div>
+        <div class="footer"></div>
 
         <div id="overlay3" class="overlay">
           <div id="content">
@@ -324,7 +328,9 @@
     </div>
 
 
-    <input type=button id=btn_off value="選択解除">
+
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
@@ -473,7 +479,7 @@
       margin: 0;
       background-color: hsla(44, 95%, 39%, 0.094);
       width: 100%;
-      height: 700px;
+      height: 600px;
       text-align:center;
     }
 
@@ -539,7 +545,7 @@
     .search-bar {
       border: 3px solid #999;
       border-radius: 10px;
-      width: 430px;
+      width: 400px;
       height: 20px;
       margin: 0 10px;
       background-color: #fff;
@@ -611,6 +617,10 @@
     }
 
     /*ジャンルボタン*/
+    .genre-body {
+      margin-bottom: 250px;
+    }
+
     .genre_png {
       border: 2px solid #999;
       width: 70px;
@@ -630,13 +640,13 @@
       overflow: hidden;
       font-size: 20px;
       width: 200px;
-      margin-left: 10px;
+      margin-left: 16px;
       }
 
     .box-block {
       position: relative;
       padding: 0;
-      margin-right: 10px;
+      /*margin-right: 10px;*/
       margin: 0;
       }
 
@@ -644,8 +654,8 @@
     .box-block {
       position: relative;
       padding: 0;
-      margin-right: 20px;
-       margin: 0;
+      /*margin-right: 0px;*/
+      margin: 0;
       }
 
     .circle {
@@ -709,6 +719,11 @@
     padding:0;
   }
 
+    .footer {
+      background-color: #fff;
+      width: 100%;
+      height: 100px;
+    }
 
     /*ポップアップ*/
     .overlay{
@@ -917,6 +932,10 @@
     }
 
     /*ジャンルボタン*/
+    .genre-body {
+      margin-bottom: 100px;
+    }
+
     .genre-body-1 {
       display: flex;
       margin-top: 70px;
@@ -1010,6 +1029,11 @@
     padding:0;
     }
 
+    .footer {
+      background-color: #fff;
+      width: 100%;
+      height: 100px;
+    }
 
     /*ポップアップ*/
     .overlay{
