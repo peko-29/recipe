@@ -8,6 +8,10 @@
         <!-- bootstrap5.0 -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+        <!--font awesome-->
+        <script src="https://kit.fontawesome.com/5340a55735.js" crossorigin="anonymous"></script>
+
         <title>検索結果</title>
     </head>
 
@@ -47,15 +51,13 @@
                 <button type="submit" class="col-md-2 m-1 btn btn-primary" id="3" data-sort="">価格</button>
                 <button type="submit" class="col-md-2 m-1 btn btn-primary" id="4" data-sort="">時間</button>
                 <button type="submit" class="col-md-2 m-1 btn btn-primary" id="5" data-sort="">タンパク量</button>
-
-
             </div>
 
             <!--レシピ一覧-->
             <table class="table table-striped table-borderless">
                 <thead>
                     <tr class="d-none d-md-table-row">
-                        <th></th>
+                        <th><div class="sort-arrow"></div></th>
                         <th>レシピ名</th>
                         <th>カロリー(kcal)</th>
                         <th>価格(円)</th>
@@ -93,15 +95,20 @@
 
                     // リセット
                     $('button').data('sort', "");
+                    $('button').removeClass('fas fa-arrow-up fa-arrow-down');
 
                     // ソート順序
                     if(sortFlg == "" || sortFlg == "desc"){
                         sortFlg = "asc";
                         $(this).data('sort', "asc");
+                        $(this).removeClass('fas fa-arrow-down');
+                        $(this).addClass('fas fa-arrow-up');
 
                     }else{
                         sortFlg = "desc";
                         $(this).data('sort', "desc");
+                        $(this).removeClass('fas fa-arrow-up');
+                        $(this).addClass('fas fa-arrow-down');
                     }
 
                     // テーブルソート処理
