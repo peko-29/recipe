@@ -44,7 +44,7 @@
                     {% for genre in genres_list %}
                       {% if genre.id == 1 %}
 
-                       <p class="genre-text"><img src="/images/meat.png" class="genre_png"> {{ genre.name }}料理</p>
+                       <p class="genre-text"><img src="/images/meat.png" class="genre_png"> <span class = "genre-name">{{ genre.name }}類</span></p>
 
                       {% endif %}
                     {% endfor %}
@@ -62,7 +62,7 @@
                     {% for genre in genres_list %}
                       {% if genre.id == 2 %}
 
-                        <p class="genre-text"><img src="/images/vegetable.png" class="genre_png">  {{ genre.name }}料理</p>
+                        <p class="genre-text"><img src="/images/vegetable.png" class="genre_png"><span class = "genre-name">{{ genre.name }}</span></p>
                       {% endif %}
                     {% endfor %}
                   </div>
@@ -80,7 +80,7 @@
                     {% for genre in genres_list %}
                       {% if genre.id == 3 %}
 
-                       <p class="genre-text"><img src="/images/egg.png" class="genre_png">{{ genre.name }}の材料</p>
+                       <p class="genre-text"><img src="/images/egg.png" class="genre_png"><span class = "genre-name">{{ genre.name }}</span></p>
                       {% endif %}
                     {% endfor %}
                   </div>
@@ -96,7 +96,7 @@
                     {% for genre in genres_list %}
                       {% if genre.id == 5 %}
 
-                        <p class="genre-text"><img src="/images/potato.png" class="genre_png">{{ genre.name }}の材料</p>
+                        <p class="genre-text"><img src="/images/potato.png" class="genre_png"><span class = "genre-name">{{ genre.name }}</span></p>
                       {% endif %}
                     {% endfor %}
                   </div>
@@ -104,7 +104,7 @@
           </div>
           </div>
         </div>
-        
+
         <!--フッター-->
       <footer></footer>
     </div>
@@ -522,6 +522,13 @@
         /*横方向中央揃え */
     }
 
+    .genre-name{
+      padding-left:12px;
+      font-size:20px;
+      position:absolute;
+      top:50px;
+    }
+
 
     /*画像*/
     .silver_png {
@@ -690,8 +697,6 @@
       zoom: 1;
       /*vertical-align: middle;*/
       /*vertical-align: center;*/
-
-
     }
 
     .genre-button {
@@ -815,7 +820,7 @@
     .continer {
       margin: 0;
     }
-    
+
     footer {
       background-color: #fff;
       width: 100%;
