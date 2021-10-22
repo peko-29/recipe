@@ -3,8 +3,8 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <!--<link rel="stylesheet" href="recipe/css/styles.css">-->
     <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
+    <meta name=”viewport” content=”width=device-width,initial-scale=1.0″>
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
     <title>検索画面</title>
   </head>
@@ -44,7 +44,8 @@
                     {% for genre in genres_list %}
                       {% if genre.id == 1 %}
 
-                       <p class="genre-text"><img src="/images/meat.png" class="genre_png">  {{ genre.name }}料理</p>
+                       <p class="genre-text"><img src="/images/meat.png" class="genre_png"> {{ genre.name }}料理</p>
+
                       {% endif %}
                     {% endfor %}
                   </div>
@@ -103,10 +104,10 @@
           </div>
           </div>
         </div>
+        
+        <!--フッター-->
+      <footer></footer>
     </div>
-
-
-
 
 
        <!--ポップアップ部分（モーダル） ・・・ ② -->
@@ -115,6 +116,7 @@
 
         <!-- 検索ボタン -->
         <button type="submit" class="search-button" disabled id="submit" value="a"></button>
+        <!--選択解除ボタン-->
         <input type=button id=btn_off value="選択解除">
 
 
@@ -200,7 +202,7 @@
             </div>
           </div>
         </div>
-        <div class="footer"></div>
+
 
         <div id="overlay3" class="overlay">
           <div id="content">
@@ -328,13 +330,13 @@
     </div>
 
 
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
 
-
-    // 選択確認
+    // 選択確認バー
     $(function(){
     $('[name="materials"]').change(function(){
             var aryCmp = [];
@@ -345,7 +347,7 @@
         });
     });
 
-    // 選択解除
+    // 選択解除ボタン
     $(function(){
         // $("#btn_on").click(function(){
         //     $(".material-button").prop("checked", true);
@@ -358,20 +360,25 @@
         });
     });
 
+    // 検索解除ボタン
+    $(function(){
+      // 初期状態のボタンは無効
+      $("#submit").prop("disabled", true);
+        // チェックボックスの状態が変わったら（クリックされたら）
+        $("input[type='checkbox']").on('change', function () {
+            // チェックされているチェックボックスの数
+            if ($(".material-button:checked").length > 0) {
+              // ボタン有効
+              $("#submit").prop("disabled", false);
+            } else {
+              // ボタン無効
+              $("#submit").prop("disabled", true);
+            }
+        });
+    });
 
-    // 検索ボタン
-    var submit = document.getElementById("submit")
-     submit.disabled = true;
-    function getValue() {
 
-      var select =
-      submit.disabled = false;
-    }
-
-
-
-
-      // モーダル
+      // モーダルを出す
       function cal1() {
         // console.log(document.getElementById("btn1").value);
         var btn1 = document.getElementById('btn1');
@@ -474,7 +481,7 @@
       margin: 0;
       background-color: hsla(44, 95%, 39%, 0.094);
       width: 100%;
-      height: 600px;
+      height: 100%;
       text-align:center;
     }
 
@@ -485,6 +492,7 @@
       color: #000;
       width: 100%;
       font-size: 22px;
+      height: 100px;
     }
 
     .continer {
@@ -499,7 +507,7 @@
     }
 
     .under-1 {
-      height: 70px;
+      height: 100px;
       margin: 0;
       padding: 0;
       display: -webkit-flex;
@@ -620,8 +628,8 @@
       border: 2px solid #999;
       width: 70px;
       height: 70px;
-      vertical-align: middle;
-      vertical-align: center;
+
+      float: left;
     }
 
     .genre-body-1 {
@@ -635,23 +643,23 @@
       overflow: hidden;
       font-size: 20px;
       width: 200px;
-      margin-left: 16px;
+      margin-left: 10px;
       }
 
     .box-block {
       position: relative;
       padding: 0;
-      /*margin-right: 10px;*/
       margin: 0;
       }
 
 
-    .box-block {
-      position: relative;
-      padding: 0;
-      /*margin-right: 0px;*/
-      margin: 0;
-      }
+    .genre01 {
+    padding: 10px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    zoom: 1;
+
+    }
 
     .circle {
       width: 18px;
@@ -675,9 +683,15 @@
     #box01 .box-block { background: rgb(255, 255, 255);
       border: 3px solid #a77a01; padding: 25px; }
 
-    .genre-text {
+    .box-block .genre-text {
       margin: 0 auto;
-      height: 80px;
+      height:80px;
+      overflow: hidden;
+      zoom: 1;
+      /*vertical-align: middle;*/
+      /*vertical-align: center;*/
+
+
     }
 
     .genre-button {
@@ -699,6 +713,7 @@
       border: 1px solid #ffc933	; /* 淵の線を指定 */
       border-radius: 20px; /* 角丸を入れて、左右が丸いボタンにする */
       padding: 5px 20px; /* 上下左右に余白をトル */
+      margin: 3px;
     }
 
      li {
@@ -714,10 +729,14 @@
     padding:0;
   }
 
-    .footer {
+    footer {
       background-color: #fff;
       width: 100%;
       height: 100px;
+      position: absolute;
+      /*←絶対位置*/
+      margin-bottom: 0;
+      /*下に固定*/
     }
 
     /*ポップアップ*/
@@ -780,7 +799,7 @@
 
 
   /*パソコンサイズ*/
-   @media screen and (min-width: 767px) {
+   @media screen and (min-width: 768px) {
 
     body {
       /*font-size: 16px;*/
@@ -795,6 +814,16 @@
 
     .continer {
       margin: 0;
+    }
+    
+    footer {
+      background-color: #fff;
+      width: 100%;
+      height: 100px;
+      position: absolute;
+      /*←絶対位置*/
+      margin-bottom: 0;
+      /*下に固定*/
     }
 
     /*タイトル*/
@@ -1024,11 +1053,6 @@
     padding:0;
     }
 
-    .footer {
-      background-color: #fff;
-      width: 100%;
-      height: 100px;
-    }
 
     /*ポップアップ*/
     .overlay{
